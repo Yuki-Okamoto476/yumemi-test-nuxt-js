@@ -1,7 +1,6 @@
 export default {
   data() {
     return {
-      hello: 'hello',
       prefItems: [],
       populationItems: [],
     }
@@ -19,18 +18,20 @@ export default {
           headers: { 'X-API-KEY': apiKey },
         }
       )
-      // const prefInfo = prefData.result
       prefData.result.forEach((pref) => this.prefItems.push(pref))
-      const populationData = await this.$axios.$get(
-        'https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?cityCode=11362&prefCode=11',
-        {
-          headers: { 'X-API-KEY': apiKey },
-        }
-      )
-      console.log(populationData.result.data[0].data)
     },
-  },
-  getCheckStatus() {
-    console.log('hello')
+    async getPopulationData(value, $event) {
+      if ($event.target.checked) {
+        const apiKey = 'IcOTaQWbCRGx0Y3uUg1sUmvTzqgJByvUvCzqCXjr'
+        const populationData = await this.$axios.$get(
+          `https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?prefCode=${value}`,
+          {
+            headers: { 'X-API-KEY': apiKey },
+          }
+        )
+       this.populationItems.push(populationData.result.data[0].data)
+       console.log(this.populationItems);
+      }
+    },
   },
 }
