@@ -12,25 +12,14 @@
           :id="`pref-${index}`"
           type="checkbox"
           name="pref"
-          @change="getPopulationData(prefItem.prefCode, $event)"
+          @change="createPopulationGraph(prefItem.prefCode, $event)"
         />
         <label :for="`pref-${index}`">{{ prefItem.prefName }}</label>
       </div>
     </div>
-    <div
-      v-for="(populationItem, firstIndex) in populationItems"
-      :key="firstIndex"
-    >
-      <div v-for="(item, secondIndex) in populationItem" :key="secondIndex">
-        <p>{{ item.year }}年:{{ item.value }}人</p>
-      </div>
-    </div>
+    <highcharts :options="chartOptions"></highcharts>
   </div>
 </template>
 
 <script lang="js" src="@/pages/index.js" />
-<style scoped>
-.pref__item {
-  display: inline-block;
-}
-</style>
+<style lang="scss" src="@/pages/index.scss" scoped />
