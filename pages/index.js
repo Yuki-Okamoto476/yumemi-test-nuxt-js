@@ -32,11 +32,10 @@ export default {
   },
   methods: {
     async getPrefData() {
-      // const apiKey = process.env.API_KEY
-      const apiKey = 'IcOTaQWbCRGx0Y3uUg1sUmvTzqgJByvUvCzqCXjr'
+      // const apiKey = 'IcOTaQWbCRGx0Y3uUg1sUmvTzqgJByvUvCzqCXjr'
       const requestUrl = 'https://opendata.resas-portal.go.jp/api/v1/prefectures'
       const config = {
-        headers: { 'X-API-KEY': apiKey },
+        headers: { 'X-API-KEY': process.env.API_KEY },
         timeout: 30000,
         params: {
           cache: new Date().getTime()
@@ -48,10 +47,10 @@ export default {
     async createPopulationGraph(value, $event) {
       const matchedPref = this.prefItems.find((item) => item.prefCode === value)
       if ($event.target.checked) {
-        const apiKey = 'IcOTaQWbCRGx0Y3uUg1sUmvTzqgJByvUvCzqCXjr'
+        // const apiKey = 'IcOTaQWbCRGx0Y3uUg1sUmvTzqgJByvUvCzqCXjr'
         const requestUrl = `https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?prefCode=${value}`
         const config = {
-          headers: { 'X-API-KEY': apiKey },
+          headers: { 'X-API-KEY': process.env.API_KEY },
           timeout: 30000,
           params: {
             cache: new Date().getTime()
